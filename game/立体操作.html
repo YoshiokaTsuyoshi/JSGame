@@ -129,6 +129,8 @@
 			}
 			window.onload = function() {
 				canvas = document.getElementById("canvas1");
+				canvas.width = canvas.offsetWidht;
+				canvas.height = canvas.offsetHeight;
 				canvas.onmousedown = canvasMouseDown;
 				canvas.onmousemove = canvasMouseMove;
 				canvas.onmouseup = canvasMouseUp;
