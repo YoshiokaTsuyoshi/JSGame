@@ -17,11 +17,10 @@
 				top: -1;
 				left: -1;
 				border: none;
-				//overflow: visible;
 			}
 		</style>
 		<script>
-			let canvas, ctx, intervalId, mouseMove = [0, 0, 0], canvasSize = [0, 0], cubes = [], cubeSize = 10, drawLimit = [[0],[0],[0]];
+			let canvas, ctx, intervalId, mouseMove = [0, 0, 0], canvasSize = [0, 0], cubes = [], cubeSize = 100, drawLimit = [[0],[0],[0]];
 			const colors = ["#000000", "#0000ff", "#ffa500", "#ffff00", "#ffffff", "#ff0000", "#008000"];
 			
 			function objEdge(x, y, z) {
@@ -38,9 +37,9 @@
 				this.m_draw = function() {
 					ctx.fillStyle = this.m_color;
 					ctx.beginPath();
-					ctx.moveTo(150 + this.m_edge[0].m_posX, 75 - this.m_edge[0].m_posY);
+					ctx.moveTo(canvasSize[0] + this.m_edge[0].m_posX, canvasSize[1] - this.m_edge[0].m_posY);
 					for(var i = 1; i < 4; i++) {
-						ctx.lineTo(150 + this.m_edge[i].m_posX, 75 - this.m_edge[i].m_posY);
+						ctx.lineTo(canvasSize[0] + this.m_edge[i].m_posX, canvasSize[1] - this.m_edge[i].m_posY);
 					}
 					ctx.closePath();
 					ctx.fill();
@@ -116,7 +115,7 @@
 				else return 0;
 			}
 			function canvasDraw() {
-				ctx.clearRect(0, 0, canvasSize[0], canvasSize[1]);
+				//ctx.clearRect(0, 0, canvasSize[0], canvasSize[1]);
 				for(var i = 0; i < 27; i++) {
 					cubes[i].m_draw();
 				}
@@ -129,8 +128,10 @@
 			}
 			window.onload = function() {
 				canvas = document.getElementById("canvas1");
-				canvas.width = canvas.offsetWidht;
-				canvas.height = canvas.offsetHeight;
+				canvas.width = canvas.offsetWidth * 2;
+				canvas.height = canvas.offsetHeight * 2;
+				//canvas.style.width = canvas.offsetWidth + 'px';
+				//canvas.style.height = canvas.offsetHeight + 'px';
 				canvas.onmousedown = canvasMouseDown;
 				canvas.onmousemove = canvasMouseMove;
 				canvas.onmouseup = canvasMouseUp;
